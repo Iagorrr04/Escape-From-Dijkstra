@@ -39,3 +39,6 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# sfml framework and cpp configs.
+SFML-2.5.1
