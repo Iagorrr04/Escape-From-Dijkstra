@@ -4,6 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include "Player.hpp"
+#include <Wall.hpp>
 
 
 int main(){
@@ -38,6 +39,10 @@ int main(){
 
     // Walls colision.
     sf::FloatRect nextpos;
+
+    // Parede desenhada
+    Wall wall(wHeight, wWidth);
+    wall.draw();
 
     // Main event loop do jogo.
     while (window.isOpen()){

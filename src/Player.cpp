@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "Player.hpp"
+#include <Player.hpp>
 
 //  Player(double WINDOW_WIDTH, double WINDOW_HEIGHT, float GRID_SIZE) {
 //      this->GRID_SIZE = GRID_SIZE;
