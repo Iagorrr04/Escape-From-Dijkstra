@@ -6,6 +6,7 @@
 #include <Wall.hpp>
 
 
+
 int main(){
     // Configurações iniciais da window.
     unsigned short int wHeight = 500;
@@ -78,8 +79,9 @@ int main(){
         // Render.     
         window.clear();
         window.draw(player);
-        window.draw(wall.get_block());
-        window.setView(view);
+        for (auto w: wall.get_block_list())
+            window.draw(w);
+
 
         // Renderizar elementos do jogo.
         //window.setView(window.getDefaultView());

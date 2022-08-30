@@ -18,5 +18,5 @@ class Wall{
 
     void set_block_size(int height, int width);
     void draw();
-    sf::RectangleShape get_block();
+    std::vector<sf::RectangleShape> &get_block_list();
 };
