@@ -1,5 +1,6 @@
 #include <Wall.hpp>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 // Temporário
 #include <iostream>
@@ -20,10 +21,6 @@ void Wall::draw(){
 
     for (int i = 0; i < this->win_width; i+=10){
         for (int j = 0; j < this->win_height; j+=10){
-            int val = (i + j) / 10;
-            if (val & 1) continue;
-
-            std::cout << i << " " << j << std::endl;
 
             sf::RectangleShape block;
             block.setSize(sf::Vector2f(this->sq_width, this->sq_height));
@@ -35,6 +32,6 @@ void Wall::draw(){
     }
 }
 
-sf::RectangleShape Wall::get_block(){
-    return this->blocks_list.front();
+std::vector<sf::RectangleShape> &Wall::get_block_list(){
+    return this->blocks_list;
 }
