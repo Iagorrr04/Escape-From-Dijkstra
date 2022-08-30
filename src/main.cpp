@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <Wall.hpp>
 
 
 int main(){
@@ -23,6 +24,10 @@ int main(){
     sf::Vector2f playerPosition(wWidth/2, wHeight/2);
     player.setPosition(playerPosition); 
     int player_velocity = 10;
+
+    // Parede desenhada
+    Wall wall(wHeight, wWidth);
+    wall.draw();
 
     // Main event loop do jogo.
     bool moving_left = false;
@@ -73,6 +78,7 @@ int main(){
         // Render.     
         window.clear();
         window.draw(player);
+        window.draw(wall.get_block());
         window.setView(view);
 
         // Renderizar elementos do jogo.
