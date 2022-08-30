@@ -4,7 +4,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-int keyTime = 8;
 
 int main(){
     // Configurações iniciais da window.
@@ -23,36 +22,53 @@ int main(){
     player.setSize(sf::Vector2f(10, 10));
     sf::Vector2f playerPosition(wWidth/2, wHeight/2);
     player.setPosition(playerPosition); 
+    int player_velocity = 10;
 
     // Main event loop do jogo.
+    bool moving_left = false;
+    bool moving_down = false;
+    bool moving_up = false;
+    bool moving_right = false;   
     while (window.isOpen()){
         sf::Event event;
 
         
         while(window.pollEvent(event)){
             
-            // Pra poder fechar a janela de fato.
-            if(event.type == sf::Event::Closed)
-                window.close();
+            switch(event.type){
+                case sf::Event::Closed:
+                    window.close();
+                break;
 
-            if(event.KeyPressed &&event.key.code == sf::Keyboard::Left && player.getPosition().x > 0){
-                std::cout << "Left Arrow Pressed." << std::endl;
-                player.move(sf::Vector2f(-5, 0));
-    
+                case sf::Event::KeyPressed:
+                    if(event.key.code == sf::Keyboard::Right) moving_right = true;
+                    if(event.key.code == sf::Keyboard::Down) moving_down = true;
+                    if(event.key.code == sf::Keyboard::Up) moving_up = true;
+                    if(event.key.code == sf::Keyboard::Left) moving_left = true;
+                break;
+                case sf::Event::KeyReleased:
+                    if(event.key.code == sf::Keyboard::Right) moving_right = false;
+                    if(event.key.code == sf::Keyboard::Down) moving_down = false;
+                    if(event.key.code == sf::Keyboard::Up) moving_up = false;
+                    if(event.key.code == sf::Keyboard::Left) moving_left = false;
+                break;
+
+                default:
+                break;
             }
-            else if(event.KeyPressed && event.key.code == sf::Keyboard::Up && player.getPosition().y > 0){
-                std::cout << "Up arrow pressed." << std::endl;
-                player.move(sf::Vector2f(0, -5));
+
+            if(moving_left && player.getPosition().x > 0){
+                    player.move(-player_velocity, 0);
             }
-            else if(event.KeyPressed && event.key.code == sf::Keyboard::Down && player.getPosition().y + player.getSize().y < window.getSize().y){
-                std::cout << "Down Arrow Pressed" << std::endl;
-                player.move(sf::Vector2f(0, 5));
+            if (moving_down && player.getPosition().y + player.getSize().y < window.getSize().y){
+                player.move(0, player_velocity);
             }
-            else if(event.KeyPressed && event.key.code == sf::Keyboard::Right && player.getPosition().x + player.getSize().x < window.getSize().x){
-                std::cout << "Right Arrow Pressed." << std::endl;
-                player.move(sf::Vector2f(5, 0));
+            if(moving_up && player.getPosition().y > 0){
+                player.move( 0, -player_velocity);
             }
-        
+            if(moving_right && player.getPosition().x + player.getSize().x < window.getSize().x){
+                player.move(player_velocity, 0);
+            }
         }
         // Render.     
         window.clear();
