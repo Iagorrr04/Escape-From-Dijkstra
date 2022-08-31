@@ -41,7 +41,7 @@ int main(){
     sf::FloatRect nextpos;
 
     // Parede desenhada
-    Wall wall(wHeight, wWidth);
+    Wall wall(WINDOW_WIDTH, WINDOW_HEIGHT);
     wall.draw();
 
     // Main event loop do jogo.
