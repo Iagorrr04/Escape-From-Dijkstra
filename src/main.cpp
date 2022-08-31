@@ -107,22 +107,19 @@ int main(){
 
         // Colisão bordas.
         sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
-        if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+
+        // Colisão paredes
+
+        bool can = true;
+        for (auto w: wall.get_block_list()){
+            auto pos = w.getPosition();
+            if (abs(pos.x - nextPosition.x + 10) + abs(pos.y - nextPosition.y + 10) < 10) {
+                can = false;
+            }      
+        }
+        if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
             player.move(player_velocity);
 
-        // // Collision Walls.
-        // for(auto &wall : WALLS){
-        //     sf::FloatRect player_bounds = player.getGlobalBounds();
-        //     nextpos.left = player_bounds.left + player_velocity;
-        //     nextpos.top = player_bounds.top + player_velocity;
-            
-        //     sf::FloatRect wall_bound;
-        //     wall_bound = wall.getGlobalBounds();
-
-        //     if(wall_bound.intersects(nextpos)){
-        //         std::cout << "Colision Detected" << std::endl;
-        //     }
-        // }
 
         // Renderizar tudo. 
         window.clear();
@@ -135,6 +132,6 @@ int main(){
 
 
     return 0;
-    }
+}
 
 
