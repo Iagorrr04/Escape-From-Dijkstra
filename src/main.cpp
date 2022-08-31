@@ -22,13 +22,6 @@ int main(){
     const float GRID_SIZE = 10.f;
 
     // Personagem principal.
-    //  sf::RectangleShape player;
-    //  player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    //  sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-    //  player.setPosition(playerPosition); 
-    //  
-    //  sf::Vector2f player_velocity;
-    //  int movement_speed = GRID_SIZE;
     Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT );
 
     // Clock.
@@ -66,25 +59,6 @@ int main(){
                 break;
             }
         }
-
-        // Colisão bordas.
-     // sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
-     // if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
-     //     player.move(player_velocity);
-
-     // // // Collision Walls.
-        // for(auto &wall : WALLS){
-        //     sf::FloatRect player_bounds = player.getGlobalBounds();
-        //     nextpos.left = player_bounds.left + player_velocity;
-        //     nextpos.top = player_bounds.top + player_velocity;
-            
-        //     sf::FloatRect wall_bound;
-        //     wall_bound = wall.getGlobalBounds();
-
-        //     if(wall_bound.intersects(nextpos)){
-        //         std::cout << "Colision Detected" << std::endl;
-        //     }
-        // }
 
         // Renderizar tudo. 
         window.clear();
