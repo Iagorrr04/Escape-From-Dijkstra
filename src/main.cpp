@@ -5,7 +5,7 @@
 #include <SFML/System.hpp>
 #include "Player.hpp"
 #include <Wall.hpp>
-#include "Player.hpp"
+#include <Player.hpp>
 
 int main(){
     // Configurações iniciais da window.
@@ -22,9 +22,6 @@ int main(){
     // Grid, 'menor unidade'
     const float GRID_SIZE = 10.f;
 
-    // Personagem principal.
-    Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT );
-
     // Clock.
     float dt;
     sf::Clock dt_clock;
@@ -35,7 +32,6 @@ int main(){
     // Parede desenhada
     Wall wall(WINDOW_WIDTH, WINDOW_HEIGHT);
     wall.draw();
-
 
     // Jagador
     Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
@@ -61,7 +57,6 @@ int main(){
             }
         }
 
-        
         // Renderizar tudo. 
         window.clear();
         window.draw(player.body);
