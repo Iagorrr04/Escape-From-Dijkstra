@@ -67,7 +67,7 @@ void Wall::draw(){
             int y_coord = (j) / this->sq_width;
             unsigned int value = map1[0][x_coord + y_coord];
 
-
+            if (value == 0xff000000) continue;
             sf::RectangleShape block;
             block.setSize(sf::Vector2f(this->sq_width, this->sq_height));
             sf::Vector2f blockPosition(j, i);
