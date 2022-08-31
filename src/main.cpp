@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <Wall.hpp>
+
 
 
 int main(){
@@ -43,6 +45,10 @@ int main(){
 
     // Walls colision.
     sf::FloatRect nextpos;
+
+    // Parede desenhada
+    Wall wall(WINDOW_HEIGHT, WINDOW_WIDTH);
+    wall.draw();
 
     // Main event loop do jogo.
     bool moving_left = false;
@@ -121,12 +127,8 @@ int main(){
         // Renderizar tudo. 
         window.clear();
         window.draw(player);
-        
-        for(auto &w : WALLS)
+        for (auto w: wall.get_block_list())
             window.draw(w);
-
-        window.setView(view);
-        window.setView(window.getDefaultView());
 
         window.display();
     }
