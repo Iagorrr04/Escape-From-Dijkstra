@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include "Player.hpp"
 
 
 int main(){
@@ -21,13 +22,14 @@ int main(){
     const float GRID_SIZE = 10.f;
 
     // Personagem principal.
-    sf::RectangleShape player;
-    player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-    player.setPosition(playerPosition); 
-    
-    sf::Vector2f player_velocity;
-    int movement_speed = GRID_SIZE;
+    //  sf::RectangleShape player;
+    //  player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
+    //  sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    //  player.setPosition(playerPosition); 
+    //  
+    //  sf::Vector2f player_velocity;
+    //  int movement_speed = GRID_SIZE;
+    Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT );
 
     // Clock.
     float dt;
@@ -45,15 +47,10 @@ int main(){
     sf::FloatRect nextpos;
 
     // Main event loop do jogo.
-    bool moving_left = false;
-    bool moving_down = false;
-    bool moving_up = false;
-    bool moving_right = false;   
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
         
-        player_velocity.x = 0.f; player_velocity.y = 0.f;
         while(window.pollEvent(event)){
             
             switch(event.type){
@@ -61,37 +58,8 @@ int main(){
                     window.close();
                 break;
 
-                case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::Right){
-                        moving_right = true;
-                        player_velocity.x = movement_speed;
-                    }
-                    if(event.key.code == sf::Keyboard::Down){
-                        moving_down = true;
-                        player_velocity.y = movement_speed;                        
-                    }
-                    if(event.key.code == sf::Keyboard::Up){
-                        moving_up = true;
-                        player_velocity.y = -movement_speed;
-                    }
-                    if(event.key.code == sf::Keyboard::Left){
-                        moving_left = true;
-                        player_velocity.x = -movement_speed;
-                    }
-                break;
-                case sf::Event::KeyReleased:
-                    if(event.key.code == sf::Keyboard::Right){
-                        moving_right = false;
-                    }
-                    if(event.key.code == sf::Keyboard::Down){
-                        moving_down = false;
-                    }
-                    if(event.key.code == sf::Keyboard::Up){
-                        moving_up = false;
-                    }
-                    if(event.key.code == sf::Keyboard::Left){
-                        moving_left = false;
-                    }
+                case (sf::Event::KeyPressed):// | sf::Event::KeyReleased ):
+                    player.move(event);
                 break;
 
                 default:
@@ -100,11 +68,11 @@ int main(){
         }
 
         // Colisão bordas.
-        sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
-        if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
-            player.move(player_velocity);
+     // sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
+     // if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+     //     player.move(player_velocity);
 
-        // // Collision Walls.
+     // // // Collision Walls.
         // for(auto &wall : WALLS){
         //     sf::FloatRect player_bounds = player.getGlobalBounds();
         //     nextpos.left = player_bounds.left + player_velocity;
@@ -120,7 +88,7 @@ int main(){
 
         // Renderizar tudo. 
         window.clear();
-        window.draw(player);
+        window.draw(player.body);
         
         for(auto &w : WALLS)
             window.draw(w);
@@ -133,6 +101,6 @@ int main(){
 
 
     return 0;
-    }
+}
 
 
