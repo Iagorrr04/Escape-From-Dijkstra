@@ -25,7 +25,7 @@ int main(){
     // Personagem principal.
     sf::RectangleShape player;
     player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    sf::Vector2f playerPosition(0, 0);
     player.setPosition(playerPosition); 
     
     sf::Vector2f player_velocity;
@@ -107,8 +107,19 @@ int main(){
 
         // Colisão bordas.
         sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
-        if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+        // Calisão paredes
+
+        bool can = true;
+        for (auto w: wall.get_block_list()){
+            auto pos = w.getPosition();
+            if (abs(pos.x - nextPosition.x + 10) + abs(pos.y - nextPosition.y + 10) < 10) {
+                can = false;
+            }
+                
+        }
+        if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
             player.move(player_velocity);
+        
 
         // // Collision Walls.
         // for(auto &wall : WALLS){
