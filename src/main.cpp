@@ -5,7 +5,7 @@
 #include <SFML/System.hpp>
 #include "Player.hpp"
 #include <Wall.hpp>
-
+#include "Player.hpp"
 
 int main(){
     // Configurações iniciais da window.
@@ -29,20 +29,16 @@ int main(){
     float dt;
     sf::Clock dt_clock;
 
-    // Walls.
-    std::vector<sf::RectangleShape> WALLS;
-    sf::RectangleShape wall_01;
-    wall_01.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    wall_01.setPosition(GRID_SIZE*4, GRID_SIZE*4);
-
-    WALLS.push_back(wall_01);
-
     // Walls colision.
     sf::FloatRect nextpos;
 
     // Parede desenhada
     Wall wall(WINDOW_WIDTH, WINDOW_HEIGHT);
     wall.draw();
+
+
+    // Jagador
+    Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
 
     // Main event loop do jogo.
     while (window.isOpen()){
@@ -65,16 +61,14 @@ int main(){
             }
         }
 
+        
         // Renderizar tudo. 
         window.clear();
         window.draw(player.body);
-        
-        for(auto &w : WALLS)
+
+        for (auto w : wall.get_block_list())
             window.draw(w);
-
-        window.setView(view);
-        window.setView(window.getDefaultView());
-
+        
         window.display();
     }
 

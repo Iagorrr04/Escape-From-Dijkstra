@@ -3,6 +3,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <Player.hpp>
+#include <Wall.hpp>
 
 //  Player(double WINDOW_WIDTH, double WINDOW_HEIGHT, float GRID_SIZE) {
 //      this->GRID_SIZE = GRID_SIZE;
@@ -13,12 +14,13 @@
 
 //  }
 
-Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, float WINDOW_HEIGHT ) {
+Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, float WINDOW_HEIGHT, Wall &wall ) {
     this->GRID_SIZE = GRID_SIZE;
     this->WINDOW_HEIGHT = WINDOW_HEIGHT;
     this->WINDOW_WIDTH = WINDOW_WIDTH;
     this->movement_speed = GRID_SIZE;
     this->position = position;
+    this->wall = wall;
 
     this->velocity = sf::Vector2f(0, 0);
 
@@ -77,10 +79,19 @@ void Player::move(sf::Event event){
             break;
     }
 
-
     // Colisão bordas.
     sf::Vector2f nextPosition = body.getPosition() + body.getSize() + velocity;
-    if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+    // Calisão paredes
+
+    bool can = true;
+    for (auto w: wall.get_block_list()){
+        auto pos = w.getPosition();
+        if (abs(pos.x - nextPosition.x + 10) + abs(pos.y - nextPosition.y + 10) < 10) {
+            can = false;
+        }
+            
+    }
+    if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
         body.move(velocity);
 
 
