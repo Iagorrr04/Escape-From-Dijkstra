@@ -20,6 +20,7 @@ public:
     Wall wall;
 
 
+    Player();
     Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, float WINDOW_HEIGHT, Wall wall);
 
     void move(sf::Event event);
