@@ -73,7 +73,7 @@ void Wall::draw(){
             sf::RectangleShape block;
             block.setSize(sf::Vector2f(this->sq_width, this->sq_height));
             sf::Vector2f blockPosition(j, i);
-            block.setPosition(blockPosition);
+            block.setPosition(blockPosition); 
             block.setFillColor(sf::Color(value));
             this->blocks_list.push_back(block);
         }

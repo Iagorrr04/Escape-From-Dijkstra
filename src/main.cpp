@@ -32,7 +32,7 @@ int main(){
     sf::FloatRect nextpos;
 
     // Parede desenhada
-    Wall wall(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Wall wall(WINDOW_HEIGHT, WINDOW_WIDTH);
     wall.draw();
 
     // Jagador
