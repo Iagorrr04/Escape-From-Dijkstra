@@ -4,8 +4,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <Wall.hpp>
+#include <Monster.hpp>
 
-
+const float RATE_MONSTER_MOVE = 20.0;
 
 int main(){
     // Configurações iniciais da window.
@@ -35,14 +36,6 @@ int main(){
     float dt;
     sf::Clock dt_clock;
 
-    // Walls.
-    std::vector<sf::RectangleShape> WALLS;
-    sf::RectangleShape wall_01;
-    wall_01.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    wall_01.setPosition(GRID_SIZE*4, GRID_SIZE*4);
-
-    WALLS.push_back(wall_01);
-
     // Walls colision.
     sf::FloatRect nextpos;
 
@@ -54,7 +47,11 @@ int main(){
     bool moving_left = false;
     bool moving_down = false;
     bool moving_up = false;
-    bool moving_right = false;   
+    bool moving_right = false;
+
+    // Monster
+    Monster monster(GRID_SIZE,GRID_SIZE);
+    sf::Clock dt_monster;
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
@@ -117,13 +114,18 @@ int main(){
                 can = false;
             }      
         }
+
         if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
             player.move(player_velocity);
 
-
+        if (dt_monster.getElapsedTime().asMilliseconds() > RATE_MONSTER_MOVE) {
+            monster.move(player.getPosition());
+            dt_monster.restart().asMilliseconds();
+        }
         // Renderizar tudo. 
         window.clear();
         window.draw(player);
+        window.draw(monster.get_monster());
         for (auto w: wall.get_block_list())
             window.draw(w);
 
