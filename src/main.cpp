@@ -105,8 +105,6 @@ int main(){
 
         // Colisão bordas.
         sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
-        if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
-            player.move(player_velocity);
 
         // Colisão paredes
 
