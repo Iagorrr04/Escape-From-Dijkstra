@@ -26,7 +26,7 @@ int main(){
     // Personagem principal.
     sf::RectangleShape player;
     player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    sf::Vector2f playerPosition(0, 0);
+    sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2 - 10);
     player.setPosition(playerPosition); 
     
     sf::Vector2f player_velocity;
@@ -121,19 +121,6 @@ int main(){
             player.move(player_velocity);
         
 
-        // // Collision Walls.
-        // for(auto &wall : WALLS){
-        //     sf::FloatRect player_bounds = player.getGlobalBounds();
-        //     nextpos.left = player_bounds.left + player_velocity;
-        //     nextpos.top = player_bounds.top + player_velocity;
-            
-        //     sf::FloatRect wall_bound;
-        //     wall_bound = wall.getGlobalBounds();
-
-        //     if(wall_bound.intersects(nextpos)){
-        //         std::cout << "Colision Detected" << std::endl;
-        //     }
-        // }
 
         // Renderizar tudo. 
         window.clear();
