@@ -9,6 +9,11 @@
 #include <Monster.hpp>
 
 const float RATE_MONSTER_MOVE = 20.0;
+const float MAX_DISTANCE_TO_PLAYER = 70;
+
+int distance(sf::Vector2f a, sf::Vector2f b){
+    return abs(a.x - b.x) + abs(a.y - b.y);
+}
 
 int main(){
     
@@ -22,6 +27,7 @@ int main(){
     sf::View view;
     view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     view.setCenter(window.getSize().x/2.f, window.getSize().y/2.f);
+    view.zoom(10000);
 
     // Grid, 'menor unidade'
     const float GRID_SIZE = 10.f;
@@ -86,10 +92,12 @@ int main(){
         // Renderizar tudo. 
         window.clear();
         window.draw(player.body);
-        window.draw(monster.get_monster());
+        if(distance(player.body.getPosition(), monster.get_monster().getPosition()) <= MAX_DISTANCE_TO_PLAYER)
+            window.draw(monster.get_monster());
 
         for (auto w : wall.get_block_list())
-            window.draw(w);
+            if(distance(player.body.getPosition(), w.getPosition()) <= MAX_DISTANCE_TO_PLAYER)
+                window.draw(w);
         
         window.display();
     }
