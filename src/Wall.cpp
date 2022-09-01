@@ -91,6 +91,9 @@ static const uint32_t map2[1][3024] = {
 };
 
 
+Wall::Wall(){}
+
+
 Wall::Wall(int height, int width){
     this->win_height = height;
     this->win_width = width;

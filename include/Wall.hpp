@@ -1,3 +1,6 @@
+#ifndef WALL_HPP
+#define WALL_HPP
+
 #include<vector>
 #include <SFML/Graphics.hpp>
 
@@ -13,6 +16,7 @@ class Wall{
     std::vector<sf::RectangleShape> blocks_list;
 
     public:
+    Wall();
     Wall(int height, int width);
     ~Wall();
 
@@ -20,3 +24,6 @@ class Wall{
     void draw();
     std::vector<sf::RectangleShape> &get_block_list();
 };
+
+#endif
+
