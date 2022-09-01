@@ -3,11 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include <Wall.hpp>
 
 
-
 int main(){
+    
     // Configurações iniciais da window.
     const unsigned short int WINDOW_HEIGHT = 360;
     const unsigned short int WINDOW_WIDTH = 840;
@@ -25,7 +26,7 @@ int main(){
     // Personagem principal.
     sf::RectangleShape player;
     player.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    sf::Vector2f playerPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    sf::Vector2f playerPosition(0, 0);
     player.setPosition(playerPosition); 
     
     sf::Vector2f player_velocity;
@@ -34,14 +35,6 @@ int main(){
     // Clock.
     float dt;
     sf::Clock dt_clock;
-
-    // Walls.
-    std::vector<sf::RectangleShape> WALLS;
-    sf::RectangleShape wall_01;
-    wall_01.setSize(sf::Vector2f(GRID_SIZE, GRID_SIZE));
-    wall_01.setPosition(GRID_SIZE*4, GRID_SIZE*4);
-
-    WALLS.push_back(wall_01);
 
     // Walls colision.
     sf::FloatRect nextpos;
@@ -55,6 +48,13 @@ int main(){
     bool moving_down = false;
     bool moving_up = false;
     bool moving_right = false;   
+
+    // Musica.
+    sf::Music main_theme;
+    main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
+    main_theme.setVolume(100);
+    main_theme.play();
+    
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
@@ -107,6 +107,8 @@ int main(){
 
         // Colisão bordas.
         sf::Vector2f nextPosition = player.getPosition() + player.getSize() + player_velocity;
+        if(nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+            player.move(player_velocity);
 
         // Colisão paredes
 
