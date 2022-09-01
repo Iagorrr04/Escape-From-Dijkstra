@@ -50,16 +50,6 @@ int main(){
     bool moving_down = false;
     bool moving_up = false;
     bool moving_right = false;   
-
-    // Musica.
-    sf::Music main_theme;
-    main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
-    main_theme.setVolume(100);
-    main_theme.play();
-
-    // Monster
-    Monster monster(GRID_SIZE,GRID_SIZE);
-    sf::Clock dt_monster;
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
