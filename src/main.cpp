@@ -32,6 +32,11 @@ int main(){
     // Grid, 'menor unidade'
     const float GRID_SIZE = 10.f;
 
+
+    
+    sf::Vector2f player_velocity;
+    int movement_speed = GRID_SIZE;
+
     // Clock.
     float dt;
     sf::Clock dt_clock;
@@ -88,6 +93,11 @@ int main(){
             monster.move(player.body.getPosition());
             dt_monster.restart().asMilliseconds();
         }
+
+        // if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
+        //     player.move(player_velocity);
+        
+
 
         // Renderizar tudo. 
         window.clear();
