@@ -3,9 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "Player.hpp"
-#include <Wall.hpp>
 #include <Player.hpp>
+#include <Wall.hpp>
+
 
 int main(){
     // Configurações iniciais da window.

@@ -14,7 +14,8 @@
 
 //  }
 
-Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, float WINDOW_HEIGHT, Wall &wall ) {
+
+Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, float WINDOW_HEIGHT, Wall wall) {
     this->GRID_SIZE = GRID_SIZE;
     this->WINDOW_HEIGHT = WINDOW_HEIGHT;
     this->WINDOW_WIDTH = WINDOW_WIDTH;
