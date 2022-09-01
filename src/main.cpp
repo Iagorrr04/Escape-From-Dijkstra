@@ -4,10 +4,12 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <Player.hpp>
+#include <SFML/Audio.hpp>
 #include <Wall.hpp>
 
 
 int main(){
+    
     // Configurações iniciais da window.
     const unsigned short int WINDOW_HEIGHT = 360;
     const unsigned short int WINDOW_WIDTH = 840;
@@ -37,6 +39,19 @@ int main(){
     Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
 
     // Main event loop do jogo.
+
+    // Main event loop do jogo.
+    bool moving_left = false;
+    bool moving_down = false;
+    bool moving_up = false;
+    bool moving_right = false;   
+
+    // Musica.
+    sf::Music main_theme;
+    main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
+    main_theme.setVolume(100);
+    main_theme.play();
+    
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
