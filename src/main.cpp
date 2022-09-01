@@ -6,7 +6,9 @@
 #include <Player.hpp>
 #include <SFML/Audio.hpp>
 #include <Wall.hpp>
+#include <Monster.hpp>
 
+const float RATE_MONSTER_MOVE = 20.0;
 
 int main(){
     
@@ -51,6 +53,10 @@ int main(){
     main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
     main_theme.setVolume(100);
     main_theme.play();
+
+    // Monstro
+    Monster monster(GRID_SIZE, GRID_SIZE);
+    sf::Clock dt_monster;
     
     while (window.isOpen()){
         sf::Event event;
@@ -72,9 +78,15 @@ int main(){
             }
         }
 
+        if (dt_monster.getElapsedTime().asMilliseconds() > RATE_MONSTER_MOVE) {
+            monster.move(player.body.getPosition());
+            dt_monster.restart().asMilliseconds();
+        }
+
         // Renderizar tudo. 
         window.clear();
         window.draw(player.body);
+        window.draw(monster.get_monster());
 
         for (auto w : wall.get_block_list())
             window.draw(w);
