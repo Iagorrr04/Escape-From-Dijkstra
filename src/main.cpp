@@ -49,7 +49,10 @@ int main(){
     bool moving_left = false;
     bool moving_down = false;
     bool moving_up = false;
-    bool moving_right = false;   
+    bool moving_right = false;
+
+    Monster monster(GRID_SIZE, GRID_SIZE);
+    sf::Clock dt_monster;
     while (window.isOpen()){
         sf::Event event;
         dt = dt_clock.restart().asSeconds();
