@@ -7,6 +7,8 @@
 #include <SFML/Audio.hpp>
 #include <Wall.hpp>
 #include <Monster.hpp>
+#include <Header.hpp>
+#include <string>
 
 const float RATE_MONSTER_MOVE = 20.0;
 const float MAX_DISTANCE_TO_PLAYER = 70;
@@ -59,6 +61,8 @@ int main(){
     // Monstro
     Monster monster(GRID_SIZE, GRID_SIZE);
     sf::Clock dt_monster;
+
+    Header header;
     
     while (window.isOpen()){
         sf::Event event;
@@ -66,6 +70,7 @@ int main(){
         // colisão do player monstro
         if(distance(player.body.getPosition(), monster.get_monster().getPosition()) <= player.body.getSize().x){ 
             player.body.setPosition(initial_position);
+            header.text.setString(std::to_string(++player.deaths) + " mortes");
         }
 
 
@@ -95,6 +100,7 @@ int main(){
 
         // Renderizar tudo. 
         window.clear();
+        window.draw(header.text);
         window.draw(player.body);
         if(distance(player.body.getPosition(), monster.get_monster().getPosition()) <= MAX_DISTANCE_TO_PLAYER)
             window.draw(monster.get_monster());

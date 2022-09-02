@@ -18,6 +18,7 @@ public:
     sf::Vector2f velocity;
     sf::Vector2f position;  
     Wall wall;
+    int deaths;
 
 
     Player();
