@@ -23,6 +23,7 @@ Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, floa
     this->movement_speed = GRID_SIZE;
     this->position = position;
     this->wall = wall;
+    this->deaths = 0;
 
     this->velocity = sf::Vector2f(0, 0);
 
