@@ -19,11 +19,18 @@ Aqui recomenda-se que sejam colocados os ícones da game engine e das linguagens
 
 </div>
 
-<div align="center">
+
+## 🦾 Instruções de compilação 
+É necessário ter o gcc, g++ e o make, pré instalados e configurados na sua máquina.
+
+```bash
+    git clone https://github.com/GameJamFGA-UnB/Escape-From-Dijkstra.git
+    cd Escape-From-Dijkstra
+    make run
+```
+
 
 ## 🧠 Desenvolvedores
-
-</div>
 
 - [Gabriel Costa de Oliveira](https://github.com/GabrielCostaDeOliveira)
 - [Iago Rocha Santos Marques](https://github.com/Iagorrr04)
