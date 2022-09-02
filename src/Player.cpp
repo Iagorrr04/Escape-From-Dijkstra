@@ -33,52 +33,26 @@ Player:: Player(sf::Vector2f position, float GRID_SIZE, float WINDOW_WIDTH, floa
 
 
 void Player::move(sf::Event event){
-
-    bool moving_left = false;
-    bool moving_down = false;
-    bool moving_up = false;
-    bool moving_right = false;   
-
+    
     velocity.x = 0;
     velocity.y = 0;
     switch(event.type){
         case sf::Event::KeyPressed:
-            if(event.key.code == sf::Keyboard::Right){
-                moving_right = true;
-                velocity.x = movement_speed;
-            }
-            if(event.key.code == sf::Keyboard::Down){
-                moving_down = true;
-                velocity.y = movement_speed;                        
-            }
-            if(event.key.code == sf::Keyboard::Up){
-                moving_up = true;
-                velocity.y = -movement_speed;
-            }
-            if(event.key.code == sf::Keyboard::Left){
-                moving_left = true;
-                velocity.x = -movement_speed;
-            }
+        
+            if(event.key.code == sf::Keyboard::Right) velocity.x = movement_speed;
+            
+            if(event.key.code == sf::Keyboard::Down) velocity.y = movement_speed;                        
+            
+            if(event.key.code == sf::Keyboard::Up) velocity.y = -movement_speed;
+            
+            if(event.key.code == sf::Keyboard::Left) velocity.x = -movement_speed;
+            
+            
 
-            break;
+        break;
 
-        case sf::Event::KeyReleased:
-            if(event.key.code == sf::Keyboard::Right){
-                moving_right = false;
-            }
-            if(event.key.code == sf::Keyboard::Down){
-                moving_down = false;
-            }
-            if(event.key.code == sf::Keyboard::Up){
-                moving_up = false;
-            }
-            if(event.key.code == sf::Keyboard::Left){
-                moving_left = false;
-            }
-            break;
-
-            default:
-            break;
+        default:
+        break;
     }
 
     // Colisão bordas.
@@ -95,6 +69,5 @@ void Player::move(sf::Event event){
     }
     if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
         body.move(velocity);
-
 
 }

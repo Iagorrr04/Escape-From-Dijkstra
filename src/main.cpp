@@ -21,6 +21,7 @@ int main(){
     const unsigned short int WINDOW_HEIGHT = 360;
     const unsigned short int WINDOW_WIDTH = 840;
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Escape From Dijsktra");
+    window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(60);
 
     // Visão da câmera.
@@ -35,10 +36,8 @@ int main(){
 
     
     sf::Vector2f player_velocity;
-    int movement_speed = GRID_SIZE;
 
     // Clock.
-    float dt;
     sf::Clock dt_clock;
 
     // Walls colision.
@@ -51,14 +50,6 @@ int main(){
     // Jagador
     Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
 
-    // Main event loop do jogo.
-
-    // Main event loop do jogo.
-    bool moving_left = false;
-    bool moving_down = false;
-    bool moving_up = false;
-    bool moving_right = false;   
-
     // Musica.
     sf::Music main_theme;
     main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
@@ -68,10 +59,8 @@ int main(){
     // Monstro
     Monster monster(GRID_SIZE, GRID_SIZE);
     sf::Clock dt_monster;
-    
     while (window.isOpen()){
         sf::Event event;
-        dt = dt_clock.restart().asSeconds();
         
         while(window.pollEvent(event)){
             
