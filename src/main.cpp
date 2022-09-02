@@ -20,7 +20,7 @@ int main(){
     // Configurações iniciais da window.
     const unsigned short int WINDOW_HEIGHT = 360;
     const unsigned short int WINDOW_WIDTH = 840;
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Escape From Dijsktra");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Escape From Dijsktra !");
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(60);
 
@@ -48,7 +48,8 @@ int main(){
     wall.draw();
 
     // Jagador
-    Player player(sf::Vector2f(WINDOW_WIDTH/2, WINDOW_HEIGHT/2), GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
+    sf::Vector2f initial_position(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    Player player(initial_position, GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
 
     // Musica.
     sf::Music main_theme;
@@ -59,9 +60,15 @@ int main(){
     // Monstro
     Monster monster(GRID_SIZE, GRID_SIZE);
     sf::Clock dt_monster;
+    
     while (window.isOpen()){
         sf::Event event;
         
+        // colisão do player monstro
+        if(distance(player.body.getPosition(), monster.get_monster().getPosition()) <= player.body.getSize().x){ 
+            player.body.setPosition(initial_position);
+        }
+
         while(window.pollEvent(event)){
             
             switch(event.type){
@@ -82,11 +89,6 @@ int main(){
             monster.move(player.body.getPosition());
             dt_monster.restart().asMilliseconds();
         }
-
-        // if(can and nextPosition.x > 0 and nextPosition.x <= WINDOW_WIDTH and nextPosition.y > 0 and nextPosition.y <= WINDOW_HEIGHT)
-        //     player.move(player_velocity);
-        
-
 
         // Renderizar tudo. 
         window.clear();
