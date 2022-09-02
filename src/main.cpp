@@ -33,8 +33,6 @@ int main(){
     // Grid, 'menor unidade'
     const float GRID_SIZE = 10.f;
 
-
-    
     sf::Vector2f player_velocity;
 
     // Clock.
@@ -49,12 +47,13 @@ int main(){
 
     // Jagador
     sf::Vector2f initial_position(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    sf::Vector2f final_position(300, 240);
     Player player(initial_position, GRID_SIZE,  WINDOW_WIDTH,  WINDOW_HEIGHT, wall);
 
     // Musica.
     sf::Music main_theme;
     main_theme.openFromFile("./media/main_theme.wav"); // deve ser comparado com a localização do make
-    main_theme.setVolume(100);
+    main_theme.setVolume(50);
     main_theme.play();
 
     // Monstro
@@ -68,6 +67,10 @@ int main(){
         if(distance(player.body.getPosition(), monster.get_monster().getPosition()) <= player.body.getSize().x){ 
             player.body.setPosition(initial_position);
         }
+
+
+        // colisão com a saída.
+        if(distance(player.body.getPosition(), final_position) <= player.body.getSize().x){ break; }
 
         while(window.pollEvent(event)){
             
