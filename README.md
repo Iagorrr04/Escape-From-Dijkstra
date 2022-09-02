@@ -34,5 +34,5 @@ Aqui recomenda-se que sejam colocados os ícones da game engine e das linguagens
 
 - [Gabriel Costa de Oliveira](https://github.com/GabrielCostaDeOliveira)
 - [Iago Rocha Santos Marques](https://github.com/Iagorrr04)
-- [Jão Pedro Silva de Carvalho](https://github.com/jps12)
+- [João Pedro Silva de Carvalho](https://github.com/jps12)
 - [José Filipi Brito de Souza](https://github.com/JoseFilipi)
